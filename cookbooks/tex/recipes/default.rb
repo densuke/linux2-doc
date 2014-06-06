@@ -10,18 +10,19 @@
 dist = node['lsb']['codename']
 ppa = "ppa:texlive-backports/ppa"
 
-package "python-software-properties" do
-  action :install
-end
-
 execute "apt-get update" do
   action :nothing
+end
+
+
+package "python-software-properties" do
+  action :install
 end
 
 execute "add ppa:texlive" do
   command "add-apt-repository #{ppa}"
   creates "/etc/apt/sources.list.d/texlive-backports-ppa-#{dist}.list"
-  notifies :run, "execute[apt-get update]"
+  notifies :run, "execute[apt-get update]", :immediately
 end
 
 %w(texlive-lang-cjk texlive-fonts-recommended).each do |pkg|
