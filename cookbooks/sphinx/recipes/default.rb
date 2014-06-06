@@ -7,8 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 
-pythons = %w(wget python-software-properties python3 python3-dev)
+execute "apt-get update" do
+  action :run
+end
 
+pythons = %w(wget python3 python3-dev)
 pythons.each do |pkg|
   package pkg do
     action :install
