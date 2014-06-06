@@ -11,7 +11,7 @@ execute "apt-get update" do
   action :run
 end
 
-pythons = %w(wget python3 python3-dev)
+pythons = %w(wget python3 python3-dev make)
 pythons.each do |pkg|
   package pkg do
     action :install
